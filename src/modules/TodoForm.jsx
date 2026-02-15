@@ -23,7 +23,6 @@ const TodoForm = () => {
                 name="todo"
                 type="text"
                 required
-                maxLength={33}
                 placeholder="Enter your tasks"
                 className="flex-1 px-6 py-4 rounded-3xl bg-white/5 backdrop-blur-xl text-white placeholder-white/60 outline-0 focus:ring-2 focus:ring-white/20 transition text-base sm:text-lg"
             />

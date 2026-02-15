@@ -7,7 +7,7 @@ const TodoItem = ({ index, item }) => {
 
     // edit
     function handleEdit(ind) {
-        const newValue = prompt(`Do you want to edit this task? - "${todos[ind].content}"\n\nType the new value below:`);
+        const newValue = prompt(`Do you want to edit this task?\n\nType the new value below:`);
         if (newValue && newValue.trim() !== "") {
             todos[ind].content = newValue.trim();
             setTodos(last => [...last]);
@@ -27,7 +27,7 @@ const TodoItem = ({ index, item }) => {
 
     // delete
     function handleDelete(ind) {
-        const confirmDelete = confirm(`Are you sure you want to permanently delete this task?\n\n"${todos[ind].content}"`);
+        const confirmDelete = confirm(`Are you sure you want to permanently delete this task?`);
         if (confirmDelete) {
             todos.splice(ind, 1)
             setTodos(last => [...last])
@@ -35,7 +35,7 @@ const TodoItem = ({ index, item }) => {
     }
 
     return (
-        <li className="task-card liquid-small flex justify-between items-start p-6 sm:p-7 rounded-3xl">
+        <li className="task-card liquid-small flex justify-between items-center p-6 sm:p-7 rounded-3xl">
 
             <div className="flex items-start gap-7 flex-1">
                 <label className="relative flex items-center justify-center w-6 h-6 sm:w-9 sm:h-9 cursor-pointer shrink-0">
