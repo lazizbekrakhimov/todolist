@@ -2,9 +2,12 @@
 
 /* Background */
 .bg-void {
+  position: fixed;
+  inset: 0;
   background:
     url('./assets/image/background.jpg') no-repeat center center / cover;
   background-color: #212121;
+  z-index: -1;
 }
 
 /* Base Liquid Glass */
@@ -86,20 +89,33 @@
   box-shadow: 0 0 20px rgba(170, 170, 170, 0.25);
 }
 
-/* Liquid animation */
-@keyframes liquidMove {
+@keyframes liquidWave {
   0% {
-    transform: translateX(-20%) rotate(25deg);
+    transform: translate3d(-18%, -4%, 0) rotate(20deg) scale(1);
+  }
+
+  25% {
+    transform: translate3d(-5%, 2%, 0) rotate(21deg) scale(1.01);
   }
 
   50% {
-    transform: translateX(20%) rotate(25deg);
+    transform: translate3d(18%, 5%, 0) rotate(22deg) scale(1.02);
+  }
+
+  75% {
+    transform: translate3d(5%, -2%, 0) rotate(21deg) scale(1.01);
   }
 
   100% {
-    transform: translateX(-20%) rotate(25deg);
+    transform: translate3d(-18%, -4%, 0) rotate(20deg) scale(1);
   }
 }
+
+.liquid::before,
+.liquid-small::before {
+  animation: liquidWave 14s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
 
 /* Hover depth */
 .liquid-small:hover {
@@ -150,24 +166,27 @@
   left: 6px;
 }
 
-/* Initial state */
+/* Bottom enter with soft click */
 .page-enter-bottom {
   opacity: 0;
-  transform: translateY(120%) scale(0.96);
-  animation: slideUpPremium 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(120%) scale(0.94);
+  animation: slideUpClick 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   will-change: transform, opacity;
 }
 
-/* Animation */
-@keyframes slideUpPremium {
+@keyframes slideUpClick {
   0% {
     opacity: 0;
-    transform: translateY(120%) scale(0.96);
+    transform: translateY(120%) scale(0.94);
   }
 
   60% {
     opacity: 1;
-    transform: translateY(-8px) scale(1.01);
+    transform: translateY(-12px) scale(1.03);
+  }
+
+  82% {
+    transform: translateY(4px) scale(0.985);
   }
 
   100% {
@@ -176,19 +195,33 @@
   }
 }
 
+
+/* Top enter with soft click */
 .page-enter-top {
   opacity: 0;
-  transform: translateY(-100px) scale(0.98);
-  animation: slideDownSoft 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(-100px) scale(0.95);
+  animation: slideDownClick 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
 }
 
-@keyframes slideDownSoft {
+@keyframes slideDownClick {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px) scale(0.95);
+  }
+
   60% {
     opacity: 1;
-    transform: translateY(10px) scale(1);
+    transform: translateY(12px) scale(1.02);
   }
+
+  82% {
+    transform: translateY(-4px) scale(0.99);
+  }
+
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
+
