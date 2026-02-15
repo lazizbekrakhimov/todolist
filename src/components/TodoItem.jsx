@@ -57,11 +57,11 @@ const TodoItem = ({ index, item }) => {
             </div>
 
             <div className="flex ml-5 gap-5 shrink-0 items-start">
-                <button onClick={() => handleEdit(index)} className="text-white/40 hover:text-white transition">
+                <button onClick={() => handleEdit(index)} className="text-white/40 hover:text-white transition cursor-pointer">
                     <Pencil size={24} />
                 </button>
 
-                <button onClick={() => handleDelete(index)} className="text-white/40 hover:text-red-400 transition">
+                <button onClick={() => handleDelete(index)} className="text-white/40 hover:text-red-400 transition cursor-pointer">
                     <Trash2 size={24} />
                 </button>
             </div>
