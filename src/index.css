@@ -4,6 +4,7 @@
 .bg-void {
   background:
     url('./assets/image/background.jpg') no-repeat center center / cover;
+  background-color: #212121;
 }
 
 /* Base Liquid Glass */
@@ -101,7 +102,6 @@
 }
 
 /* Hover depth */
-.liquid:hover,
 .liquid-small:hover {
   transform: translateY(-6px);
   box-shadow:
@@ -148,4 +148,47 @@
   color: #222;
   top: 1px;
   left: 6px;
+}
+
+/* Initial state */
+.page-enter-bottom {
+  opacity: 0;
+  transform: translateY(120%) scale(0.96);
+  animation: slideUpPremium 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* Animation */
+@keyframes slideUpPremium {
+  0% {
+    opacity: 0;
+    transform: translateY(120%) scale(0.96);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.01);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.page-enter-top {
+  opacity: 0;
+  transform: translateY(-100px) scale(0.98);
+  animation: slideDownSoft 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slideDownSoft {
+  60% {
+    opacity: 1;
+    transform: translateY(10px) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -2,20 +2,40 @@ import { useContext, useEffect, useState } from "react";
 import { FiCheckSquare } from "react-icons/fi";
 import { Context } from "../context/Context";
 
-const HelloPartMusic = () => {
+const HelloPart = () => {
     const [tilt, setTilt] = useState(0);
     const { userName, setUserName } = useContext(Context);
 
     useEffect(() => {
         let frame;
-        const animate = () => {
-            const time = Date.now() / 150;
-            const angle = Math.sin(time) * 3;
-            setTilt(angle);
+        const maxAmplitude = 3;
+        const fadeInDuration = 5000;
+        const delay = 3000;
+
+        const startAnimation = () => {
+            let startTime = null;
+
+            const animate = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+
+                const amplitude = Math.min((elapsed / fadeInDuration) * maxAmplitude, maxAmplitude);
+
+                const angle = Math.sin(Date.now() / 150) * amplitude;
+                setTilt(angle);
+
+                frame = requestAnimationFrame(animate);
+            };
+
             frame = requestAnimationFrame(animate);
         };
-        animate();
-        return () => cancelAnimationFrame(frame);
+
+        const timeout = setTimeout(startAnimation, delay);
+
+        return () => {
+            clearTimeout(timeout);
+            cancelAnimationFrame(frame);
+        };
     }, []);
 
     const handleEditName = () => {
@@ -26,7 +46,7 @@ const HelloPartMusic = () => {
     };
 
     return (
-        <div className="mb-13 relative text-center">
+        <div className="page-enter-top mb-13 relative text-center">
             <div
                 className="inline-block px-6 py-3 transition-transform duration-100 cursor-default"
                 style={{
@@ -58,4 +78,4 @@ const HelloPartMusic = () => {
     );
 };
 
-export default HelloPartMusic;
+export default HelloPart;
